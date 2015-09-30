@@ -3,6 +3,10 @@ body, html {
     padding: 0;
 }
 
+.scene {
+    overflow: hidden;
+}
+
 .scene, .layer {
     position: absolute;
     width: 100%;
@@ -35,6 +39,12 @@ body, html {
         bottom: 0.09%;
     }
 
+    .balloon {
+        @include fixed-element('bg-balloon.png');
+        right: 3.2926829%;
+        top: 38.1818182%;
+    }
+
     .elephant {
         @include fixed-element('bg-elephant.png');
         right: 25.1829268%;
@@ -54,6 +64,12 @@ body, html {
         left: -5%;
         bottom: -3.5%;
         background: url('../assets/bg-ground.png') center bottom no-repeat;
+    }
+
+    .ferris-wheel {
+        @include fixed-element('ferris-wheel.png');
+        left: 8.8%;
+        bottom: 0;
     }
 
     .ice-cream-stand {
