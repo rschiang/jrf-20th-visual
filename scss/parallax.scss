@@ -122,28 +122,48 @@ body, html {
 }
 
 .ferris-wheel {
-    $wheel-length: 30s;
+    $wheel-duration: 30s;
+    $cabin-count: 20;
 
     @include keyframes(wheel) {
         from { @include rotate(0deg); }
         to { @include rotate(360deg); }
     }
 
-    @include keyframes(reverse-wheel) {
-        from { @include rotate(0deg); }
-        to { @include rotate(-360deg); }
-    }
-
     .wheel {
         @include fixed-position(10%, 10%, 10%, 10%);
-        @include animation(wheel $wheel-length linear infinite);
+        @include animation(wheel $wheel-duration linear infinite);
         background: url('../assets/ferris-wheel.png') center / contain no-repeat;
     }
 
     .cabin {
-        @include fixed-element('ferris-cabin.png');
-        @include fixed-position($top: 0, $left: .2688406%);
-        @include animation(reverse-wheel $wheel-length linear infinite);
+        @include fixed-position(0, 0, 0, 0);
+        @include animation(reverse-wheel $wheel-duration linear infinite);
+    }
+
+    i {
+        background: url('../assets/ferris-cabin-1.png') center no-repeat;
+        display: block;
+        height: 10%;
+        left: 45%;
+        position: absolute;
+        top: 45%;
+        width: 10%;
+
+        &:nth-child(5n+1) { background-image: url('../assets/ferris-cabin-1.png'); }
+        &:nth-child(5n+2) { background-image: url('../assets/ferris-cabin-2.png'); }
+        &:nth-child(5n+3) { background-image: url('../assets/ferris-cabin-3.png'); }
+        &:nth-child(5n+4) { background-image: url('../assets/ferris-cabin-4.png'); }
+
+        @for $i from 1 through $cabin-count {
+            @include keyframes(c-#{$i}) {
+                $angle: $i * 360deg / $cabin-count;
+                from { @include transform(rotate($angle) translate(-50%) rotate(-$angle)); }
+                to { @include transform(rotate($angle - 360deg) translate(-50%) rotate(-$angle -360deg)); }
+            }
+
+            &:nth-child(#{$i}) { @include animation(c-#{$i} $wheel-duration linear infinite); }
+        }
     }
 
     .text {

@@ -41,21 +41,13 @@ $widescreen-width: 96em;
     }
 }
 
-@mixin fixed-size($width: false, $height: false, $size: false) {
+@mixin fixed-size($width: false, $height: false) {
     @if $width { width: $width; }
     @if $height { height: $height; }
-    @if $size { background-size: $size; }
-}
-
-@mixin responsive-scale {
-    @include mobile-only { background-size: percentage($mobile-ratio); }
-    @include tablet-only { background-size: percentage($tablet-ratio); }
-    @include desktop-only { background-size: percentage($desktop-ratio); }
 }
 
 @mixin fixed-element($source-url) {
     $url: '../assets/' + $source-url;
-    position: absolute;
     background: url($url) no-repeat;
     @include fixed-size($width: image-width(absolute-path($url)),
                         $height: image-height(absolute-path($url)));
