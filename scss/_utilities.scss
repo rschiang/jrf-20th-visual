@@ -1,3 +1,4 @@
+@import 'compass/css3/transform';
 
 $mobile-ratio: .5;
 $tablet-ratio: .75;
@@ -25,12 +26,19 @@ $widescreen-width: 96em;
     }
 }
 
-@mixin fixed-position($top: false, $right: false, $bottom: false, $left: false, $position: absolute) {
+@mixin fixed-position($top: false, $right: false, $bottom: false, $left: false, $position: absolute, $origin: null) {
     @if $top { top: $top; }
     @if $right { right: $right; }
     @if $bottom { bottom: $bottom; }
     @if $left { left: $left; }
     @if $position { position: $position; }
+
+    @if $origin != false {
+        @if $origin == null {
+            $origin: if($top, top, if($bottom, bottom, center)) if($left, left, if($right, right, center));
+        }
+        background-position: $origin;
+    }
 }
 
 @mixin fixed-size($width: false, $height: false, $size: false) {
@@ -39,32 +47,16 @@ $widescreen-width: 96em;
     @if $size { background-size: $size; }
 }
 
-@mixin responsive-size($width: false, $height: false, $size: contain) {
-    @include fixed-size($width, $height, if($size == contain, $size, false));
-
-    @include mobile-only {
-        @include fixed-size($width: if($width, $width * $mobile-ratio, false),
-                            $height: if($height, $height * $mobile-ratio, false),
-                            $size: if($size == auto, percentage($mobile-ratio), false));
-    }
-
-    @include tablet-only {
-        @include fixed-size($width: if($width, $width * $tablet-ratio, false),
-                            $height: if($height, $height * $tablet-ratio, false),
-                            $size: if($size == auto, percentage($tablet-ratio), false));
-    }
-
-    @include desktop-only {
-        @include fixed-size($width: if($width, $width * $desktop-ratio, false),
-                            $height: if($height, $height * $desktop-ratio, false),
-                            $size: if($size == auto, percentage($desktop-ratio), false));
-    }
+@mixin responsive-scale {
+    @include mobile-only { background-size: percentage($mobile-ratio); }
+    @include tablet-only { background-size: percentage($tablet-ratio); }
+    @include desktop-only { background-size: percentage($desktop-ratio); }
 }
 
 @mixin fixed-element($source-url) {
     $url: '../assets/' + $source-url;
     position: absolute;
     background: url($url) no-repeat;
-    @include responsive-size($width: image-width(absolute-path($url)),
-                             $height: image-height(absolute-path($url)));
+    @include fixed-size($width: image-width(absolute-path($url)),
+                        $height: image-height(absolute-path($url)));
 }

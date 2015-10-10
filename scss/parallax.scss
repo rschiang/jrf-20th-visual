@@ -21,7 +21,7 @@ body, html {
 
 .layer {
     .background {
-        @include fixed-position($top: -5%, $left: -5%);
+        @include fixed-position($top: -5%, $left: -5%, $origin: false);
         @include fixed-size(110%, 110%);
         background: url('../assets/bg-cloud.png') center / cover no-repeat;
     }
@@ -47,14 +47,21 @@ body, html {
     }
 
     .ground {
-        @include fixed-position($bottom: -1em, $left: -5%);
-        @include fixed-size($width: 110%, $height: 286px);
-        background: url('../assets/bg-ground.png') center bottom no-repeat;
+        $height: 286px;
+
+        background: url('../assets/bg-ground.png') bottom center / cover no-repeat;
+        height: $height;
+        width: 110%;
+
+        @include fixed-position($bottom: -1em, $left: -5%, $origin: false);
+        @include mobile-only { height: ($height * $mobile-ratio); }
+        @include tablet-only { height: ($height * $tablet-ratio); }
+        @include desktop-only { height: ($height * $desktop-ratio); }
     }
 
     .ferris-wheel {
         @include fixed-position($bottom: 0, $left: 8.8%);
-        @include responsive-size(688px, 692px, false);
+        @include fixed-size(688px, 692px);
     }
 
     .ice-cream-stand {
@@ -105,6 +112,12 @@ body, html {
     .popcorn {
         @include fixed-element('bg-popcorn.png');
         @include fixed-position($right: 17.195122%, $bottom: -.5em);
+    }
+
+    > :not(.fixed) {
+        @include mobile-only { background-size: percentage($mobile-ratio); }
+        @include tablet-only { background-size: percentage($tablet-ratio); }
+        @include desktop-only { background-size: percentage($desktop-ratio); }
     }
 }
 
