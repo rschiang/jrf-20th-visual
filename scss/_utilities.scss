@@ -1,0 +1,70 @@
+
+$mobile-ratio: .5;
+$tablet-ratio: .75;
+$desktop-ratio: .9;
+
+$tablet-width: 64em;
+$desktop-width: 80em;
+$widescreen-width: 96em;
+
+@mixin mobile-only {
+    @media only screen and (max-width: $tablet-width) {
+        @content;
+    }
+}
+
+@mixin tablet-only {
+    @media only screen and (min-width: $tablet-width) and (max-width: $desktop-width) {
+        @content;
+    }
+}
+
+@mixin desktop-only {
+    @media only screen and (min-width: $desktop-width) and (max-width: $widescreen-width) {
+        @content;
+    }
+}
+
+@mixin fixed-position($top: false, $right: false, $bottom: false, $left: false, $position: absolute) {
+    @if $top { top: $top; }
+    @if $right { right: $right; }
+    @if $bottom { bottom: $bottom; }
+    @if $left { left: $left; }
+    @if $position { position: $position; }
+}
+
+@mixin fixed-size($width: false, $height: false, $size: false) {
+    @if $width { width: $width; }
+    @if $height { height: $height; }
+    @if $size { background-size: $size; }
+}
+
+@mixin responsive-size($width: false, $height: false, $size: contain) {
+    @include fixed-size($width, $height, if($size == contain, $size, false));
+
+    @include mobile-only {
+        @include fixed-size($width: if($width, $width * $mobile-ratio, false),
+                            $height: if($height, $height * $mobile-ratio, false),
+                            $size: if($size == auto, percentage($mobile-ratio), false));
+    }
+
+    @include tablet-only {
+        @include fixed-size($width: if($width, $width * $tablet-ratio, false),
+                            $height: if($height, $height * $tablet-ratio, false),
+                            $size: if($size == auto, percentage($tablet-ratio), false));
+    }
+
+    @include desktop-only {
+        @include fixed-size($width: if($width, $width * $desktop-ratio, false),
+                            $height: if($height, $height * $desktop-ratio, false),
+                            $size: if($size == auto, percentage($desktop-ratio), false));
+    }
+}
+
+@mixin fixed-element($source-url) {
+    $url: '../assets/' + $source-url;
+    position: absolute;
+    background: url($url) no-repeat;
+    @include responsive-size($width: image-width(absolute-path($url)),
+                             $height: image-height(absolute-path($url)));
+}
