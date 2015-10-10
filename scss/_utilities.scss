@@ -8,6 +8,8 @@ $tablet-width: 64em;
 $desktop-width: 80em;
 $widescreen-width: 96em;
 
+$base-font-size: 16px;
+
 @mixin mobile-only {
     @media only screen and (max-width: $tablet-width) {
         @content;
@@ -51,4 +53,12 @@ $widescreen-width: 96em;
     background: url($url) no-repeat;
     @include fixed-size($width: image-width(absolute-path($url)),
                         $height: image-height(absolute-path($url)));
+}
+
+@mixin responsive-em { // Use when percentage is not available
+    font-size: $base-font-size;
+
+    @include mobile-only { font-size: ($base-font-size * $mobile-ratio); }
+    @include tablet-only { font-size: ($base-font-size * $tablet-ratio); }
+    @include desktop-only { font-size: ($base-font-size * $desktop-ratio); }
 }
