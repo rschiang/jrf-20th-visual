@@ -8,19 +8,20 @@ body, html {
 }
 
 .scene {
+    clip: rect(auto, auto, auto, auto);
     overflow: hidden;
 }
 
 .scene, .layer {
-    height: 100%;
+    height: 90vh;
     margin: 0;
     padding: 0;
-    position: absolute;
     width: 100%;
 }
 
 .layer {
     pointer-events: none;
+    position: absolute;
 
     @include keyframes(floating) {
         0% { @include transform(translate(0)); }
@@ -133,6 +134,7 @@ body, html {
     }
 
     .link {
+        color: transparent;
         display: block;
         outline: none;
         pointer-events: all;
