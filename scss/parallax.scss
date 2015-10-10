@@ -25,7 +25,7 @@ $widescreen-width: 96em;
 @mixin responsive-size($width: false, $height: false, $size: contain) {
     @if $width { width: $width; }
     @if $height { height: $height; }
-    @if $size != auto { background-size: contain; }
+    @if $size == contain { background-size: contain; }
 
     @media only screen and (min-width: $desktop-width) and (max-width: $widescreen-width) {
         @if $width { width: $width * $desktop-ratio; }
@@ -100,13 +100,52 @@ $widescreen-width: 96em;
         left: -5%;
         bottom: -1em;
         background: url('../assets/bg-ground.png') center bottom no-repeat;
-        @include responsive-size(false, 286px, auto 50%);
+        @include responsive-size(false, 286px, auto);
     }
 
     .ferris-wheel {
-        @include fixed-element('ferris-wheel.png');
+        position: absolute;
         left: 8.8%;
         bottom: 0;
+        @include responsive-size(688px, 692px, false);
+
+        @import "compass/css3/animation";
+        @import "compass/css3/transform";
+
+        $wheel-length: 30s;
+        @include keyframes(wheel) {
+            from { @include rotate(0deg); }
+            to { @include rotate(360deg); }
+        }
+
+        @include keyframes(reverse-wheel) {
+            from { @include rotate(0deg); }
+            to { @include rotate(-360deg); }
+        }
+
+        .wheel {
+            position: absolute;
+            top: 10%;
+            bottom: 10%;
+            left: 10%;
+            right: 10%;
+            background: url('../assets/ferris-wheel.png') center no-repeat;
+            background-size: contain;
+            @include animation(wheel $wheel-length linear infinite);
+        }
+
+        .cabin {
+            @include fixed-element('ferris-cabin.png');
+            top: 0;
+            left: .2688406%;
+            @include animation(reverse-wheel $wheel-length linear infinite);
+        }
+
+        .text {
+            @include fixed-element('ferris-text.png');
+            left: 29.116087%;
+            bottom: 0;
+        }
     }
 
     .ice-cream-stand {
