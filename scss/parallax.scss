@@ -17,13 +17,23 @@ body, html {
 
 $mobile-ratio: 0.5;
 $tablet-ratio: 0.75;
+$desktop-ratio: 0.9;
 $tablet-width: 64em;
 $desktop-width: 80em;
+$widescreen-width: 96em;
 
 @mixin responsive-size($width: false, $height: false, $size: contain) {
     @if $width { width: $width; }
     @if $height { height: $height; }
     @if $size != auto { background-size: contain; }
+
+    @media only screen and (min-width: $desktop-width) and (max-width: $widescreen-width) {
+        @if $width { width: $width * $desktop-ratio; }
+        @if $height { height: $height * $desktop-ratio; }
+        @if $size == auto {
+            background-size: percentage($desktop-ratio);
+        }
+    }
 
     @media only screen and (min-width: $tablet-width) and (max-width: $desktop-width) {
         @if $width { width: $width * $tablet-ratio; }
@@ -88,7 +98,7 @@ $desktop-width: 80em;
         position: absolute;
         width: 110%;
         left: -5%;
-        bottom: -3.5%;
+        bottom: -1em;
         background: url('../assets/bg-ground.png') center bottom no-repeat;
         @include responsive-size(false, 286px, auto 50%);
     }
@@ -120,42 +130,42 @@ $desktop-width: 80em;
     .stands {
         @include fixed-element('bg-stands.png');
         right: 51.2195122%;
-        bottom: -0.5%;
+        bottom: -.5em;
     }
 
     .carousel {
         @include fixed-element('bg-carousel.png');
         right: 39.8902439%;
-        bottom: -1%;
+        bottom: -.5em;
     }
 
     .tent {
         @include fixed-element('bg-tent.png');
         right: 19.8170732%;
-        bottom: -1%;
+        bottom: -.5em;
     }
 
     .jrf-20 {
         @include fixed-element('bg-jrf20.png');
         right: 20.6707317%;
-        bottom: -1.5%;
+        bottom: -.5em;
     }
 
     .left-bench {
         @include fixed-element('bg-benchleft.png');
         left: -5.304878%;
-        bottom: -1.75%;
+        bottom: -.5em;
     }
 
     .right-bench {
         @include fixed-element('bg-benchright.png');
         right: 3.4878049%;
-        bottom: -2%;
+        bottom: -.5em;
     }
 
     .popcorn {
         @include fixed-element('bg-popcorn.png');
         right: 17.195122%;
-        bottom: -2%;
+        bottom: -.5em;
     }
 }
