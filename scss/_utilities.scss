@@ -1,9 +1,11 @@
 @import 'compass/css3/transform';
 
+$tiny-ratio: .375;
 $mobile-ratio: .5;
 $tablet-ratio: .75;
 $desktop-ratio: .9;
 
+$mobile-width: 36em;
 $tablet-width: 64em;
 $desktop-width: 80em;
 $widescreen-width: 96em;
@@ -11,8 +13,15 @@ $widescreen-width: 96em;
 $base-font-size: 32px;
 $base-em: $base-font-size / 1em;
 
+
+@mixin tiny-only {
+    @media only screen and (max-width: $mobile-width) {
+        @content;
+    }
+}
+
 @mixin mobile-only {
-    @media only screen and (max-width: $tablet-width) {
+    @media only screen and (min-width: $mobile-width) and (max-width: $tablet-width) {
         @content;
     }
 }
@@ -56,9 +65,17 @@ $base-em: $base-font-size / 1em;
                         $height: image-height(absolute-path($url)));
 }
 
+@mixin responsive-size {
+    @include tiny-only { background-size: percentage($tiny-ratio); }
+    @include mobile-only { background-size: percentage($mobile-ratio); }
+    @include tablet-only { background-size: percentage($tablet-ratio); }
+    @include desktop-only { background-size: percentage($desktop-ratio); }
+}
+
 @mixin responsive-em { // Use when percentage is not available
     font-size: $base-font-size;
 
+    @include tiny-only { font-size: ($base-font-size * $tiny-ratio); }
     @include mobile-only { font-size: ($base-font-size * $mobile-ratio); }
     @include tablet-only { font-size: ($base-font-size * $tablet-ratio); }
     @include desktop-only { font-size: ($base-font-size * $desktop-ratio); }
