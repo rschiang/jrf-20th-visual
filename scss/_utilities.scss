@@ -50,7 +50,7 @@ $base-em: $base-font-size / 1em;
 }
 
 @mixin fixed-element($source-url) {
-    $url: '../assets/' + $source-url;
+    $url: '../images/' + $source-url;
     background: url($url) no-repeat;
     @include fixed-size($width: image-width(absolute-path($url)),
                         $height: image-height(absolute-path($url)));

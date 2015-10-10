@@ -30,7 +30,7 @@ body, html {
     .background {
         @include fixed-position($top: -5%, $left: -5%, $origin: false);
         @include fixed-size(110%, 110%);
-        background: url('../assets/bg-cloud.png') center / cover no-repeat;
+        background: url('../images/bg-cloud.png') center / cover no-repeat;
     }
 
     .roller-coaster {
@@ -58,7 +58,7 @@ body, html {
     .ground {
         $height: 286px;
 
-        background: url('../assets/bg-ground.png') bottom center / cover no-repeat;
+        background: url('../images/bg-ground.png') bottom center / cover no-repeat;
         height: #{$height / $base-font-size}em;
         width: 110%;
 
@@ -145,7 +145,7 @@ body, html {
         @include fixed-position($bottom: (69px / $base-em), $left: (69px / $base-em), $origin: false);
         @include fixed-size((551px / $base-em), (551px / $base-em));
         @include animation(wheel $wheel-duration linear infinite);
-        background: url('../assets/ferris-wheel.png') center / contain no-repeat;
+        background: url('../images/ferris-wheel.png') center / contain no-repeat;
     }
 
     .cabin {
@@ -157,13 +157,13 @@ body, html {
         @include fixed-size(10%, 10%);
         @include fixed-position($top: 45%, $left: 45%, $origin: false);
 
-        background: url('../assets/ferris-cabin-1.png') center / contain no-repeat;
+        background: url('../images/ferris-cabin-1.png') center / contain no-repeat;
         display: block;
 
-        &:nth-child(5n+1) { background-image: url('../assets/ferris-cabin-1.png'); }
-        &:nth-child(5n+2) { background-image: url('../assets/ferris-cabin-2.png'); }
-        &:nth-child(5n+3) { background-image: url('../assets/ferris-cabin-3.png'); }
-        &:nth-child(5n+4) { background-image: url('../assets/ferris-cabin-4.png'); }
+        &:nth-child(5n+1) { background-image: url('../images/ferris-cabin-1.png'); }
+        &:nth-child(5n+2) { background-image: url('../images/ferris-cabin-2.png'); }
+        &:nth-child(5n+3) { background-image: url('../images/ferris-cabin-3.png'); }
+        &:nth-child(5n+4) { background-image: url('../images/ferris-cabin-4.png'); }
 
         @for $i from 1 through $cabin-count {
             @include keyframes(c-#{$i}) {
@@ -180,6 +180,6 @@ body, html {
     .text {
         @include fixed-size((290px / $base-em), (548px / $base-em));
         @include fixed-position($bottom: 0, $left: (200px / $base-em), $origin: false);
-        background: url('../assets/ferris-text.png') center bottom / contain no-repeat;
+        background: url('../images/ferris-text.png') center bottom / contain no-repeat;
     }
 }
