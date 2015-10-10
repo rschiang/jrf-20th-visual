@@ -20,19 +20,25 @@ $tablet-ratio: 0.75;
 $tablet-width: 64em;
 $desktop-width: 80em;
 
-@mixin responsive-size($width, $height) {
-    width: $width;
-    height: $height;
-    background-size: contain;
+@mixin responsive-size($width: false, $height: false, $size: contain) {
+    @if $width { width: $width; }
+    @if $height { height: $height; }
+    @if $size != auto { background-size: contain; }
 
     @media only screen and (min-width: $tablet-width) and (max-width: $desktop-width) {
-        width: $width * $tablet-ratio;
-        height: $height * $tablet-ratio;
+        @if $width { width: $width * $tablet-ratio; }
+        @if $height { height: $height * $tablet-ratio; }
+        @if $size == auto {
+            background-size: percentage($tablet-ratio);
+        }
     }
 
     @media only screen and (max-width: $tablet-width) {
-        width: $width * $mobile-ratio;
-        height: $height * $mobile-ratio;
+        @if $width { width: $width * $mobile-ratio; }
+        @if $height { height: $height * $mobile-ratio; }
+        @if $size == auto {
+            background-size: percentage($mobile-ratio);
+        }
     }
 }
 
@@ -81,10 +87,10 @@ $desktop-width: 80em;
     .ground {
         position: absolute;
         width: 110%;
-        height: 286px;
         left: -5%;
         bottom: -3.5%;
         background: url('../assets/bg-ground.png') center bottom no-repeat;
+        @include responsive-size(false, 286px, auto 50%);
     }
 
     .ferris-wheel {
