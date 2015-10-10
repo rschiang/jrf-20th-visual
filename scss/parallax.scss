@@ -66,11 +66,6 @@ body, html {
         @include responsive-em;
     }
 
-    .ferris-wheel {
-        @include fixed-position($bottom: 0, $left: 8.8%);
-        @include fixed-size(688px, 692px);
-    }
-
     .ice-cream-stand {
         @include fixed-element('bg-icecream.png');
         @include fixed-position($right: 10%, $bottom: 28.8636364%);
@@ -132,10 +127,14 @@ body, html {
 }
 
 .ferris-wheel {
+    @include fixed-position($bottom: 0, $left: 8.8%);
+    @include fixed-size((690px / $base-em), (690px / $base-em));
+    @include responsive-em;
+
     $wheel-duration: 30s;
     $cabin-count: 20;
-    $cabins-height: (621px / $base-font-size) * 1em;
-    $cabins-width: (621px / $base-font-size) * 1em;
+    $cabins-height: (621px / $base-em);
+    $cabins-width: (621px / $base-em);
 
     @include keyframes(wheel) {
         from { @include rotate(0deg); }
@@ -143,19 +142,18 @@ body, html {
     }
 
     .wheel {
-        @include fixed-position(10%, 10%, 10%, 10%);
+        @include fixed-position($bottom: (69px / $base-em), $left: (69px / $base-em), $origin: false);
+        @include fixed-size((551px / $base-em), (551px / $base-em));
         @include animation(wheel $wheel-duration linear infinite);
         background: url('../assets/ferris-wheel.png') center / contain no-repeat;
     }
 
     .cabin {
-        @include fixed-size($cabins-width, $cabins-height);
-        @include fixed-position($top: 7.5%, $left: 7.5%);
-        //@include animation(wheel $wheel-duration linear infinite);
+        @include fixed-size(85%, 85%);
+        @include fixed-position($bottom: 7.5%, $left: 7.5%, $origin: false);
     }
 
     i {
-        @include responsive-em;
         @include fixed-size(10%, 10%);
         @include fixed-position($top: 45%, $left: 45%, $origin: false);
 
@@ -180,7 +178,8 @@ body, html {
     }
 
     .text {
-        @include fixed-element('ferris-text.png');
-        @include fixed-position($bottom: 0, $left: 29.116087%);
+        @include fixed-size((290px / $base-em), (548px / $base-em));
+        @include fixed-position($bottom: 0, $left: (200px / $base-em), $origin: false);
+        background: url('../assets/ferris-text.png') center bottom / contain no-repeat;
     }
 }
