@@ -20,6 +20,13 @@ body, html {
 }
 
 .layer {
+    @include keyframes(floating) {
+        0% { @include transform(translate(0)); }
+        33% { @include transform(translate(-5%, 1%)); }
+        67% { @include transform(translate(0, -2%)); }
+        100% { @include transform(translate(5%, 1%)); }
+    }
+
     .background {
         @include fixed-position($top: -5%, $left: -5%, $origin: false);
         @include fixed-size(110%, 110%);
@@ -34,6 +41,7 @@ body, html {
     .balloon {
         @include fixed-element('bg-balloon.png');
         @include fixed-position($top: 38.1818182%, $right: 3.2926829%);
+        @include animation(floating 15s ease infinite alternate);
     }
 
     .elephant {
@@ -44,6 +52,7 @@ body, html {
     .zeppelin {
         @include fixed-element('bg-zeppelin.png');
         @include fixed-position($top: 21.5909091%, $right: 10.7926829%);
+        @include animation(floating 12s ease-in-out infinite alternate);
     }
 
     .ground {
@@ -65,16 +74,19 @@ body, html {
     .ice-cream-stand {
         @include fixed-element('bg-icecream.png');
         @include fixed-position($right: 10%, $bottom: 28.8636364%);
+        @include animation(floating 6s ease-in-out infinite alternate-reverse);
     }
 
     .hot-balloon {
         @include fixed-element('bg-hotballoon.png');
         @include fixed-position($top: 15.7954545%, $left: 5.7926829%);
+        @include animation(floating 7s ease-in-out infinite alternate);
     }
 
     .plane {
         @include fixed-element('bg-plane.png');
         @include fixed-position($top: 8.9772727%, $right: 30.9146341%);
+        @include animation(floating 5s ease-in-out infinite alternate);
     }
 
     .stands {
