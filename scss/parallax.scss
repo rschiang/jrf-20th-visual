@@ -151,7 +151,7 @@ body, html {
     .cabin {
         @include fixed-size($cabins-width, $cabins-height);
         @include fixed-position($top: 7.5%, $left: 7.5%);
-        @include animation(wheel $wheel-duration linear infinite);
+        //@include animation(wheel $wheel-duration linear infinite);
     }
 
     i {
@@ -170,8 +170,9 @@ body, html {
         @for $i from 1 through $cabin-count {
             @include keyframes(c-#{$i}) {
                 $angle: (($i - 1) / $cabin-count * 360deg);
+                $correction: (360deg / ($wheel-duration / 1s));
                 from { @include transform(rotate($angle) translate(($cabins-width / 2)) rotate(-$angle)); }
-                to { @include transform(rotate((180deg + $angle)) translate(($cabins-width / 2)) rotate((180deg - $angle))); }
+                to { @include transform(rotate((360deg + $angle)) translate(($cabins-width / 2)) rotate((-360deg - $angle))); }
             }
 
             &:nth-child(#{$i}) { @include animation(c-#{$i} $wheel-duration linear infinite); }
