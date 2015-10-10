@@ -20,6 +20,8 @@ body, html {
 }
 
 .layer {
+    pointer-events: none;
+
     @include keyframes(floating) {
         0% { @include transform(translate(0)); }
         33% { @include transform(translate(-5%, 1%)); }
@@ -31,6 +33,11 @@ body, html {
         @include fixed-position($top: -5%, $left: -5%, $origin: false);
         @include fixed-size(110%, 110%);
         background: url('../images/bg-cloud.png') center / cover no-repeat;
+    }
+
+    .logo {
+        @include fixed-element('jrf-logo.png');
+        @include fixed-position($top: 2%, $left: 2%);
     }
 
     .roller-coaster {
@@ -123,6 +130,15 @@ body, html {
         @include mobile-only { background-size: percentage($mobile-ratio); }
         @include tablet-only { background-size: percentage($tablet-ratio); }
         @include desktop-only { background-size: percentage($desktop-ratio); }
+    }
+
+    .link {
+        display: block;
+        outline: none;
+        pointer-events: all;
+        text-decoration: none;
+
+        &:hover, &:active { opacity: .9; }
     }
 }
 
