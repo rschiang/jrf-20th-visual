@@ -185,7 +185,7 @@ body, html {
         @include fixed-size(10%, 10%);
         @include fixed-position($top: 45%, $left: 45%, $origin: false);
 
-        background: url('../images/ferris-cabin-1.png') center / contain no-repeat;
+        background: url('../images/ferris-cabin-5.png') center / contain no-repeat;
         display: block;
 
         &:nth-child(5n+1) { background-image: url('../images/ferris-cabin-1.png'); }
