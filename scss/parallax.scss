@@ -45,6 +45,7 @@ body, html {
     .roller-coaster {
         @include fixed-element('bg-rollercoaster.png');
         @include fixed-position($right: .03%, $bottom: .09%);
+        @include on-narrow-screen { right: -5%; }
     }
 
     .balloon {
@@ -56,6 +57,8 @@ body, html {
     .elephant {
         @include fixed-element('bg-elephant.png');
         @include fixed-position($right: 25.1829268%, $bottom: -2%);
+        @include tiny-screen-only { right: 4%; }
+        @include narrow-screen-only { right: 15%; }
     }
 
     .zeppelin {
@@ -96,21 +99,25 @@ body, html {
     .stands {
         @include fixed-element('bg-stands.png');
         @include fixed-position($right: 51.2195122%, $bottom: -.5em);
+        @include on-narrow-screen { right: 43%; }
     }
 
     .carousel {
         @include fixed-element('bg-carousel.png');
         @include fixed-position($right: 39.8902439%, $bottom: -.5em);
+        @include on-narrow-screen { right: 30%; }
     }
 
     .tent {
         @include fixed-element('bg-tent.png');
         @include fixed-position($right: 19.8170732%, $bottom: -.5em);
+        @include on-narrow-screen { right: 15%; }
     }
 
     .jrf-20 {
         @include fixed-element('bg-jrf20.png');
         @include fixed-position($right: 20.6707317%, $bottom: -.5em);
+        @include on-narrow-screen { right: 10.67%; }
     }
 
     .left-bench {
@@ -121,11 +128,13 @@ body, html {
     .right-bench {
         @include fixed-element('bg-benchright.png');
         @include fixed-position($right: 3.4878049%, $bottom: -.5em);
+        @include on-narrow-screen { right: -14%; }
     }
 
     .popcorn {
         @include fixed-element('bg-popcorn.png');
         @include fixed-position($right: 17.195122%, $bottom: -.5em);
+        @include on-narrow-screen { right: 5%; }
     }
 
     > :not(.fixed) {
@@ -157,6 +166,8 @@ body, html {
         from { @include rotate(0deg); }
         to { @include rotate(360deg); }
     }
+
+    @include on-narrow-screen { left: 2%; }
 
     .wheel {
         @include fixed-position($bottom: (69px / $base-em), $left: (69px / $base-em), $origin: false);

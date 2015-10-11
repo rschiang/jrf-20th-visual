@@ -10,6 +10,9 @@ $tablet-width: 64em;
 $desktop-width: 80em;
 $widescreen-width: 96em;
 
+$alternate-tiny-width: 27em;
+$alternate-mobile-width: 45em;
+
 $base-font-size: 32px;
 $base-em: $base-font-size / 1em;
 
@@ -34,6 +37,26 @@ $base-em: $base-font-size / 1em;
 
 @mixin desktop-only {
     @media only screen and (min-width: $desktop-width) and (max-width: $widescreen-width) {
+        @content;
+    }
+}
+
+// Alternate breakpoint for zooming
+
+@mixin tiny-screen-only {
+    @media only screen and (max-width: $alternate-tiny-width) {
+        @content;
+    }
+}
+
+@mixin narrow-screen-only {
+    @media only screen and (min-width: $alternate-tiny-width) and (max-width: $alternate-mobile-width) {
+        @content;
+    }
+}
+
+@mixin on-narrow-screen {
+    @media only screen and (max-width: $alternate-mobile-width) {
         @content;
     }
 }
